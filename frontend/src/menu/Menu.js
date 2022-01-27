@@ -68,7 +68,11 @@ const Menu = (props) => {
           <MenuIcon />
         </IconButton> */}
         <Typography variant="h6" className={classes.title}>
-          BLOGLogo
+          
+          <Link style={{ textDecoration: 'none', color:"#fff" }}   to='/home'>
+            BLOGLogo
+          </Link>
+
         </Typography>
 
 

@@ -40,9 +40,12 @@ const AdminDashboard = (props) => {
             <main>
 
             <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={{width:280}}>
-    <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <span className="fs-4">Blog Dashboard</span>
-    </a>
+            <Link   className={isActive(props.history,"/home" )} to="/home">
+               <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span className="fs-4">Blog Dashboard</span>
+              </a>
+        </Link>
+    
     <hr/>
     <ul className="nav nav-pills flex-column mb-auto">
       <li>
@@ -52,26 +55,17 @@ const AdminDashboard = (props) => {
         
       </li>
       <li>
-      <Link aria-current="page" className={isActive(props.history,"/admin/category" )} to="/admin/category">
-        <AddIcon/>        Categorie
-        </Link>
-        
+          <Link aria-current="page" className={isActive(props.history,"/admin/category" )} to="/admin/category">
+            <AddIcon/>        Categorie
+          </Link>
       </li>
+
       <li>
-        <a href="#" className="nav-link text-white">
-        <DynamicFormIcon /> New Form
-        </a>
+          <Link aria-current="page" className={isActive(props.history,"/homepage" )}   to="/homepage">
+            <AddIcon/>        Preview
+          </Link>
       </li>
-      <li>
-        <a href="#" className="nav-link text-white">
-        <GroupsIcon /> Committee
-        </a>
-      </li>
-      <li>
-        <a href="#" className="nav-link text-white">
-        <VideoStableIcon /> Add Record
-        </a>
-      </li>
+      
     </ul>
     <hr/>
 
@@ -79,9 +73,8 @@ const AdminDashboard = (props) => {
 
   </div>
   <div className="b-example-divider"></div>
-
-            </main>
-      </div>
+  </main> 
+</div>
       
     )
 }

@@ -1,0 +1,24 @@
+.col{
+    margin: 20px;
+    text-align: center;
+    height: 170px;
+    border-radius: 10px;
+    padding-top:50px ;
+}
+ 
+
+.column1{
+    background-color: #D0F2FF;
+}
+
+.column2{
+    background-color: #C8FACD;
+}
+
+.column3{
+    background-color: #FFE7D9;
+}
+
+.column4{
+    background-color: #F7EAB5;
+}

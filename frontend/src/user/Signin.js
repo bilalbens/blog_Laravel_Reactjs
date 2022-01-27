@@ -56,10 +56,10 @@ setUser({...user, [e.target.id]:e.target.value})
 const handleSubmit = (e) => {
   e.preventDefault();
 
-  axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
+  axios.get('http://localhost:8001/sanctum/csrf-cookie').then(response => {
     // Login...
 
-          axios.post("http://localhost:8000/api/login", user).then(res=>{
+          axios.post("http://localhost:8001/api/login", user).then(res=>{
             if(res.data.status === 200){
                 localStorage.setItem('auth_token', res.data.token)
                 localStorage.setItem('auth_name', res.data.username)

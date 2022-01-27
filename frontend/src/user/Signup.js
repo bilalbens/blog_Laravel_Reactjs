@@ -57,8 +57,8 @@ export default function Signup(props) {
    const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
-          axios.post("http://localhost:8000/api/register", user).then(res=>{
+    axios.get('http://localhost:8001/sanctum/csrf-cookie').then(response => {
+          axios.post("http://localhost:8001/api/register", user).then(res=>{
               if(res.data.status === 200){
                   localStorage.setItem('auth_token', res.data.token)
                   localStorage.setItem('auth_name', res.data.username)
