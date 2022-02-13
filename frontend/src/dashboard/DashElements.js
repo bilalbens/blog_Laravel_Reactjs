@@ -4,7 +4,7 @@ import './dashboardElements.css'
 import PostsTable from './PostsTable';
 // ----------------------------------------------------------------------
 
-export default function DashElements() {
+export default function DashElements(props) {
 
 
   const [posts, setPosts] = useState([]);
@@ -29,7 +29,7 @@ export default function DashElements() {
                setCategories(res.data.categories)
                
      })
-  }, []);
+  }, [props]);
 
 
 

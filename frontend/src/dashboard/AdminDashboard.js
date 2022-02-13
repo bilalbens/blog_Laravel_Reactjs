@@ -48,6 +48,14 @@ const AdminDashboard = (props) => {
     
     <hr/>
     <ul className="nav nav-pills flex-column mb-auto">
+
+       <li>
+          <Link aria-current="page" className={isActive(props.history,"/homepage" )}   to="/homepage">
+            <AddIcon/>        Home
+          </Link>
+      </li>
+
+
       <li>
         <Link   aria-current="page" className={isActive(props.history,"/admin/post" )} to="/admin/post">
         <ListIcon/>        Post
@@ -60,11 +68,7 @@ const AdminDashboard = (props) => {
           </Link>
       </li>
 
-      <li>
-          <Link aria-current="page" className={isActive(props.history,"/homepage" )}   to="/homepage">
-            <AddIcon/>        Preview
-          </Link>
-      </li>
+      
       
     </ul>
     <hr/>

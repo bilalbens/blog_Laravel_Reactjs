@@ -33,14 +33,13 @@ const [post, setPost] = useState({
 const [formData, setFormData] = useState(new FormData()); 
 
 //content
-const [content, setContent] = useState("**Hello world!!!**");
+const [content, setContent] = useState("**Your Content!!!**");
 
 //image state
 const [image, setImage] = useState([]);
 
 //categories
 const [categories, setCategories] = useState([]);
-
 
 
 //handle input
@@ -93,25 +92,18 @@ useEffect(() => {
                if(res.data.status === 200){
                   console.log("post added successfully");
                   document.getElementById("post_form").reset();
+                  setContent("**Your Content!!!**")
+
+
                }else{
                  console.log(res.data.errors)
                 setPost({...post, error_list:res.data.errors})
+
                }
           })
 
   
   };
-
-
-
-
-
-     
-      
-     
-
-
-
 
 
 
@@ -192,6 +184,7 @@ useEffect(() => {
                                     id="category"
                                     label="Category"
                                     name="category" 
+                                    // defaultValue=
                                     onChange={handleChange}
 
                                   >

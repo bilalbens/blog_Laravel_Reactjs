@@ -78,7 +78,7 @@ const ShowPost = (props) => {
                             related && (
                                 related.map(relatedPost=>(
                                     <div key={relatedPost.id} className="card my-3 mx-4 p-4  shadow-sm  bg-body rounded" >
-                                    <img  src={`http://localhost:8001/${relatedPost.postImage}`}  width='100px' height="120px"  className="card-img-top"  />
+                                    <img style={{objectFit:"cover"}}  src={`http://localhost:8001/${relatedPost.postImage}`}  width='100px' height="120px"  className="card-img-top"  />
                                     
         
                                     <div className="card-body">

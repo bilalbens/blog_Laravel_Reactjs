@@ -51,27 +51,31 @@ class PostController extends Controller
 
 
     // //posts by category
-    // public function limitPost($id){
-    //     $post = Post::limit($id)->get();
-    //     if($post){
-    //         return response()->json(
-    //             [
-    //                 'status'=>200,
-    //                 'post'=>$post,
-    //             ]
-    //         );
+    public function PostsByCetegory($id,$category){
+        $posts = Post::where([
+            ['id', "!=",$id],
+            ["category",'=',$category]
+        ])->get();
 
-    //     }else{
-    //         return response()->json(
-    //             [
-    //                 'status'=>404,
-    //                 'message'=>"No Post Found",
-    //             ]
-    //         );
+        if($posts){
+            return response()->json(
+                [
+                    'status'=>200,
+                    'posts'=>$posts,
+                ]
+            );
 
-    //     }
+        }else{
+            return response()->json(
+                [
+                    'status'=>404,
+                    'message'=>"No Posts Found",
+                ]
+            );
 
-    // }
+        }
+
+    }
 
     //posts with skip and limit 
     // ->offset(0)->limit(10)->get();
@@ -161,4 +165,46 @@ class PostController extends Controller
         }
         
     }
+
+
+    //delete post
+
+    public function delete($id){
+
+        $post = Post::findOrFail($id);
+        if($post){
+            $post->delete(); 
+            return response()->json(
+                [
+                    'status'=>204,
+                ]
+            );
+
+        }else{
+            return response()->json(
+                [
+                    'status'=>404,
+                    'message'=>"No Post Found",
+                ]
+            );
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

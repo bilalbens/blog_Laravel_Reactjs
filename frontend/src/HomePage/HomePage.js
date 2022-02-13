@@ -20,10 +20,13 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [skip, setSkip] = useState(0);
+  const [limit, setLimit] = useState(6);
+  const [size, setSize] = useState(0);
 
-  //retrieve categories
-  
+
   useEffect(() => {
+
     axios.get('http://localhost:8001/api/categories').then(res=>
     { 
           if(res.data.status===200)
@@ -31,18 +34,11 @@ const HomePage = () => {
           
     })
 
-  }, []);
-  
-
-
-
-  //retrieve posts
-
-  useEffect(() => {
-    axios.get('http://localhost:8001/api/posts').then(res=>
+    axios.get(`http://localhost:8001/api/postslimit/${skip}/${limit}`).then(res=>
     { 
           if(res.data.status===200){
              setPosts(res.data.posts)
+             setSize(res.data.posts.length)
              setLoading(false)
           }
            
@@ -50,6 +46,81 @@ const HomePage = () => {
   }, []);
 
 
+
+
+
+//next Posts
+const loadMore = () => {
+
+    const toskip = skip + limit
+
+    
+    axios.get(`http://localhost:8001/api/postslimit/${toskip}/${limit}`).then(res=>
+    { 
+          if(res.data.status===200){
+             setPosts([...posts,...res.data.posts])
+             setSkip(toskip);
+             setSize(res.data.posts.length)
+            //  setLoading(false)
+          }
+           
+    })
+
+}
+
+
+
+const loadMoreButton = ()=>{
+  return(
+      (   
+          size > 0 &&
+          size >= limit &&
+          ((<div className="text-center">
+          <button onClick={loadMore} className="btn btn-outline-success">Load More</button>
+        </div>))
+      )
+  )
+}
+
+
+
+
+//filter by category
+const filterByCategory = (e,category)=>{
+    // e.preventDefault();
+    axios.get(`http://localhost:8001/api/posts/0/${category}`).then(res=>
+    { 
+          if(res.data.status===200){  
+              
+                setPosts([...res.data.posts])
+                setSize(res.data.posts.length)
+              
+             
+            //  setLoading(false)
+          }
+           
+    })
+
+
+}
+
+
+//show posts 
+const showPosts = ()=>{
+
+    if(posts && posts.length>0){
+      return posts.map(post=>(
+                          <PostCard post={post}/>
+                      ))
+    }
+    else{
+      return (
+        <div className="col-3 mx-auto  p-4 text-secondary  my-3 " >
+          <h3>No Posts Found</h3>
+        </div>
+      ) 
+    }
+}
 
   if(loading){
     return (
@@ -87,10 +158,18 @@ const HomePage = () => {
                                     {
                                       posts && (
                                         categories.map(category=>(
-                                          <div className="mx-5">
-                                            <input type="checkbox" className="btn-check my-4" id={category.id} />
-                                            <label className="btn btn-outline-primary my-2" for={category.id}>{category.name}</label>
-                                          </div>
+                                              <div key={category.id} className="mx-5 form-check">
+                                                <input onChange={(e)=>{filterByCategory(e,category.name)}} 
+                                                      className="form-check-input" 
+                                                      type="radio" 
+                                                      name="categories" 
+                                                      id={category.name} 
+                                                />
+
+                                                <label className="form-check-label" for={category.name} >
+                                                {category.name}
+                                                </label>
+                                              </div>
 
                                         ))
                                       )
@@ -98,7 +177,7 @@ const HomePage = () => {
                                 
 
                               </div>
-                              <div className="btn-group d-flex flex-column mx-5 my-3" role="group" aria-label="Basic checkbox toggle button group">
+                               {/* <div className="btn-group d-flex flex-column mx-5 my-3" role="group" aria-label="Basic checkbox toggle button group">
                                         <h4>By Time:</h4>
                                         <div className="mx-5 form-check">
                                           <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
@@ -114,19 +193,16 @@ const HomePage = () => {
                                         </div>
                                 
 
-                              </div>
+                              </div>  */}
 
                     </div>
 
                       <div className="col-8 mx-auto p-5 text-secondary shadow my-3 rounded-3" >
                         <h2>Posts</h2>
                           {
-                            posts && (
-                              posts.map(post=>(
-                                      <PostCard post={post}/>
-                              ))
-                            )
+                              showPosts() 
                           }
+                          {loadMoreButton()}
                       </div>
           </div>
     </>

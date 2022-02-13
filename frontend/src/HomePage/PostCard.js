@@ -10,7 +10,7 @@ const PostCard = ({post}) => {
                     <div className="col-10 mx-auto  p-4 text-secondary" >
 
                         <div key={post.id} className="card my-3 mx-5 p-5  shadow-sm  bg-body rounded" >
-                            <img  src={`http://localhost:8001/${post.postImage}`}  width='160px' height="450px"  className="card-img-top"  />
+                            <img style={{objectFit:"cover"}}  src={`http://localhost:8001/${post.postImage}`}  width='160px' height="450px"  className="card-img-top"  />
                             
 
                             <div className="card-body">

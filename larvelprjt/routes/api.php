@@ -19,8 +19,9 @@ Route::post('login', [AuthController::class, "login"]);
 Route::post('addpost', [PostController::class, "store"]);
 Route::get('posts', [PostController::class, "index"]);
 Route::get('post/{id}', [PostController::class, "onePost"]);
-Route::get('posts/{id}/{category}', [PostController::class, "PostsByCetegory"]);
+Route::get('posts/{id?}/{category}', [PostController::class, "PostsByCetegory"]);
 Route::get('postslimit/{skip}/{limit}', [PostController::class, "PostsByLim"]);
+Route::delete('post/{id}/', [PostController::class, "delete"]);
 
 
 
